@@ -13,20 +13,23 @@ import type { Cron } from '@/services/cron.service';
 import { deleteCron } from '@/services/cron.service';
 import TableSkeleton from './Table/TableSkeleton';
 import DeleteDialog from './DeleteDialog';
+import ViewURLDialog from './ViewURLDialog';
 
 interface MonitorsTableProps {
   crons: Cron[];
   isLoading?: boolean;
   error?: unknown;
+  onRequestUsername: () => void;
 }
 
 const statusColorClasses: Record<string, string> = {
   UP: 'bg-emerald-500',
   DOWN: 'bg-red-500',
   PENDING: 'bg-amber-500',
+  ERROR: 'bg-orange-500',
 };
 
-const MonitorsTable = ({ crons, isLoading, error }: MonitorsTableProps) => {
+const MonitorsTable = ({ crons, isLoading, error, onRequestUsername }: MonitorsTableProps) => {
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
@@ -34,7 +37,23 @@ const MonitorsTable = ({ crons, isLoading, error }: MonitorsTableProps) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cron'] });
     },
+    onError: (error: any) => {
+      // Check if it's an authentication error
+      if (error.response?.status === 401 || error.response?.status === 403) {
+        onRequestUsername();
+      }
+    },
   });
+
+  const handleDelete = (id: string) => {
+    // Check if username is set
+    const username = localStorage.getItem('username');
+    if (!username) {
+      onRequestUsername();
+      return;
+    }
+    deleteMutation.mutate(id);
+  };
 
   if (isLoading) {
     return <TableSkeleton rows={5} />;
@@ -111,7 +130,8 @@ const MonitorsTable = ({ crons, isLoading, error }: MonitorsTableProps) => {
                     >
                       {status}
                     </Badge>
-                    <DeleteDialog cron={cron} onClick={() => deleteMutation.mutate(cron.id)} />
+                    <ViewURLDialog cronId={cron.id} />
+                    <DeleteDialog cron={cron} onClick={() => handleDelete(cron.id)} />
                   </div>
                 </TableCell>
               </TableRow>

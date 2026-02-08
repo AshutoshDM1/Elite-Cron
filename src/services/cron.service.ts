@@ -1,5 +1,16 @@
 import api from './api';
 
+export interface Log {
+  id: string;
+  status: string;
+  statusCode: number | null;
+  responseTime: number | null;
+  errorMessage: string | null;
+  errorType: string | null;
+  checkAt: string;
+  createdAt: string;
+}
+
 export interface Url {
   id: string;
   url: string;
@@ -8,6 +19,14 @@ export interface Url {
   totalDownTime: number;
   averageResponseTime: number;
   lastCheckedAt: string;
+  totalChecks?: number;
+  lastStatus?: string | null;
+}
+
+export interface UrlWithLogs extends Url {
+  logs: Log[];
+  totalChecks: number;
+  lastStatus: string | null;
 }
 
 export interface Cron {
@@ -16,6 +35,10 @@ export interface Cron {
   createdAt: string;
   updatedAt: string;
   url: Url;
+}
+
+export interface CronDetail extends Omit<Cron, 'url'> {
+  url: UrlWithLogs;
 }
 
 interface ApiResponse<T> {
@@ -27,6 +50,11 @@ interface ApiResponse<T> {
 
 export const getCrons = async (): Promise<Cron[]> => {
   const response = await api.get<ApiResponse<Cron[]>>('/api/v1/cron');
+  return response.data.data;
+};
+
+export const getCronById = async (id: string): Promise<CronDetail> => {
+  const response = await api.get<ApiResponse<CronDetail>>(`/api/v1/cron/${id}`);
   return response.data.data;
 };
 

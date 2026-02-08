@@ -1,13 +1,36 @@
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { FilterIcon } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import CreateCronForm from './CreateCronForm/CreateCronForm';
+
+export type FilterStatus = 'all' | 'up' | 'down' | 'pending' | 'error';
 
 interface MonitorsHeaderProps {
   total: number;
   downCount?: number;
+  filterStatus: FilterStatus;
+  onFilterChange: (filter: FilterStatus) => void;
+  onRequestUsername: () => void;
 }
 
-const MonitorsHeader = ({ total, downCount = 0 }: MonitorsHeaderProps) => {
+const MonitorsHeader = ({ total, downCount = 0, filterStatus, onFilterChange, onRequestUsername }: MonitorsHeaderProps) => {
+  const filterLabel = {
+    all: 'All',
+    up: 'Up',
+    down: 'Down',
+    pending: 'Pending',
+    error: 'Error',
+  }[filterStatus];
+
   return (
     <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div>
@@ -26,11 +49,26 @@ const MonitorsHeader = ({ total, downCount = 0 }: MonitorsHeaderProps) => {
         </p>
       </div>
       <div className="flex items-center gap-2">
-        {/* Placeholder for future filters */}
-        <Button variant="outline" size="sm" className="hidden sm:inline-flex">
-          Filter
-        </Button>
-        <CreateCronForm />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="sm" className="gap-2">
+              <FilterIcon className="h-4 w-4" />
+              <span>{filterLabel}</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-[160px]">
+            <DropdownMenuLabel>Filter by status</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuRadioGroup value={filterStatus} onValueChange={(value) => onFilterChange(value as FilterStatus)}>
+              <DropdownMenuRadioItem value="all">All</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="up">Up</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="down">Down</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="pending">Pending</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="error">Error</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <CreateCronForm onRequestUsername={onRequestUsername} />
       </div>
     </div>
   );

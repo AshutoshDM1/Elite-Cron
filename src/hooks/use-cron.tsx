@@ -9,6 +9,7 @@ const useCron = () => {
   const { data, isLoading, error } = useQuery<Cron[], Error>({
     queryKey: ['cron'],
     queryFn: getCrons,
+    refetchInterval: 30000, // in 30 seconds
   });
 
   useEffect(() => {

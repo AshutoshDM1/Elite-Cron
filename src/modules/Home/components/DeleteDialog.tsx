@@ -1,10 +1,10 @@
 import { AlertDialog , AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";    
 import { AlertDialogContent } from "@/components/ui/alert-dialog";
 import { AlertDialogFooter } from "@/components/ui/alert-dialog";
 import { AlertDialogCancel } from "@/components/ui/alert-dialog";
 import { AlertDialogAction } from "@/components/ui/alert-dialog";
 import type { Cron } from "@/services/cron.service";
+import { Badge } from "@/components/ui/badge";
 
 interface DeleteDialogProps {
   cron: Cron;
@@ -15,11 +15,11 @@ const DeleteDialog = ({ cron, onClick }: DeleteDialogProps) => {
   return (
     <AlertDialog>
     <AlertDialogTrigger asChild>
-      <Button
-        className="text-xs hover:bg-red-500 hover:text-white"
+      <Badge
+        className="text-xs hover:bg-red-500 hover:text-white cursor-pointer"
       >
         Delete
-      </Button>
+      </Badge>
     </AlertDialogTrigger>
     <AlertDialogContent>
       <AlertDialogHeader>
