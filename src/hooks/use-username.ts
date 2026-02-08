@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 
 export const useUsername = () => {
   const [username, setUsername] = useState<string | null>(() => {
     // Initialize from localStorage immediately to prevent flash
     return localStorage.getItem('username');
   });
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
 
   const saveUsername = (newUsername: string) => {
     localStorage.setItem('username', newUsername);

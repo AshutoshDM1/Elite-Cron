@@ -1,4 +1,3 @@
-import { ModeToggle } from '@/components/ui/toggle';
 import { Button } from '@/components/ui/button';
 import { LogOutIcon, UserIcon } from 'lucide-react';
 import {
@@ -10,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Logo from '../logo/logo';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 interface TopbarProps {
   username?: string | null;
@@ -59,7 +59,7 @@ const Topbar = ({ username, onRequestUsername }: TopbarProps) => {
                 <span>Login</span>
               </Button>
             )}
-            <ModeToggle />
+            <ThemeToggle />
           </div>
         </div>
       </div>

@@ -1,14 +1,24 @@
-import { Moon, Sun } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useTheme } from '@/lib/theme-context';
+import * as React from "react"
+import { type VariantProps } from "class-variance-authority"
+import { Toggle as TogglePrimitive } from "radix-ui"
 
-export function ModeToggle() {
-  const { setTheme } = useTheme();
-  const { theme } = useTheme();
+import { cn } from "@/lib/utils"
+import { toggleVariants } from "./toggle-variants"
+
+function Toggle({
+  className,
+  variant,
+  size,
+  ...props
+}: React.ComponentProps<typeof TogglePrimitive.Root> &
+  VariantProps<typeof toggleVariants>) {
   return (
-    <Button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="" size="icon">
-      <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-      <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-    </Button>
-  );
+    <TogglePrimitive.Root
+      data-slot="toggle"
+      className={cn(toggleVariants({ variant, size, className }))}
+      {...props}
+    />
+  )
 }
+
+export { Toggle }

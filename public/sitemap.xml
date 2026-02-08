@@ -6,7 +6,7 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://elitecron.com/</loc>
+    <loc>https://elite-cron.vercel.app/</loc>
     <lastmod>2026-02-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -15,7 +15,7 @@
   <!-- Add more pages as you create them -->
   <!-- Example:
   <url>
-    <loc>https://elitecron.com/about</loc>
+    <loc>https://elite-cron.vercel.app/about</loc>
     <lastmod>2026-02-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
