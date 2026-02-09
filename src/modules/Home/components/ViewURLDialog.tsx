@@ -73,7 +73,7 @@ const ViewURLDialog = ({ cronId }: ViewURLDialogProps) => {
           View
         </Badge>
       </DialogTrigger>
-      <DialogContent className="max-w-4xl min-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl lg:min-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-left">
             {isLoading ? (
