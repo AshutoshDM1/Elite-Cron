@@ -22,9 +22,9 @@ const UsernameDialog = ({ open, onUsernameSet }: UsernameDialogProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const trimmedUsername = username.trim();
-    
+
     if (!trimmedUsername) {
       setError('Username is required');
       return;
@@ -50,9 +50,10 @@ const UsernameDialog = ({ open, onUsernameSet }: UsernameDialogProps) => {
     <Dialog open={open} onOpenChange={() => {}}>
       <DialogContent className="sm:max-w-md" showCloseButton={false}>
         <DialogHeader>
-          <DialogTitle>Welcome to Elite Cron</DialogTitle>
+          <DialogTitle>Welcome to Epicron</DialogTitle>
           <DialogDescription>
-            Please enter your username to continue. This will be used to authenticate your API requests.
+            Please enter your username to continue. This will be used to authenticate your API
+            requests.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
@@ -70,9 +71,7 @@ const UsernameDialog = ({ open, onUsernameSet }: UsernameDialogProps) => {
                 autoFocus
                 className={error ? 'border-destructive' : ''}
               />
-              {error && (
-                <p className="text-sm text-destructive">{error}</p>
-              )}
+              {error && <p className="text-sm text-destructive">{error}</p>}
               <p className="text-xs text-muted-foreground">
                 Username must be at least 3 characters (letters, numbers, _, -)
               </p>

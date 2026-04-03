@@ -21,7 +21,8 @@ const Topbar = ({ username, onRequestUsername }: TopbarProps) => {
     localStorage.removeItem('username');
     window.location.reload();
   };
-  const githubRepoUrl = import.meta.env.VITE_GITHUB_REPO_URL || 'https://github.com/AshutoshDM1/Elite-Cron';
+  const githubRepoUrl =
+    import.meta.env.VITE_GITHUB_REPO_URL || 'https://github.com/AshutoshDM1/Elite-Cron';
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
@@ -29,21 +30,21 @@ const Topbar = ({ username, onRequestUsername }: TopbarProps) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Logo />
-            <span className="text-2xl font-bold tracking-wider mb-1">Elite Cron</span>
+            <span className="text-2xl font-bold tracking-wider mb-1">Epicron</span>
           </div>
           <div className="flex items-center gap-3">
-          <a
-            href={githubRepoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex"
-          >
-            <Button variant="outline" size="sm" className="gap-2 hover:bg-accent">
-              <Github className="h-4 w-4" />
-              <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
-              <span>Star on GitHub</span>
-            </Button>
-          </a>
+            <a
+              href={githubRepoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex"
+            >
+              <Button variant="outline" size="sm" className="gap-2 hover:bg-accent">
+                <Github className="h-4 w-4" />
+                <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
+                <span>Star on GitHub</span>
+              </Button>
+            </a>
             {username ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
