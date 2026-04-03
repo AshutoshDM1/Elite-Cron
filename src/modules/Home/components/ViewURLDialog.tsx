@@ -69,7 +69,7 @@ const ViewURLDialog = ({ cronId }: ViewURLDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Badge variant="outline" className="cursor-pointer bg-pink-500 hover:bg-pink-600">
+        <Badge variant="outline" className="cursor-pointer text-white bg-pink-500 hover:bg-pink-600">
           View
         </Badge>
       </DialogTrigger>

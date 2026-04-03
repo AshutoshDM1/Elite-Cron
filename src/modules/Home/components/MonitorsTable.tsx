@@ -127,7 +127,7 @@ const MonitorsTable = ({ crons, isLoading, error, onRequestUsername }: MonitorsT
                           ? 'default'
                           : 'secondary'
                       }
-                      className="text-xs"
+                      className={`text-xs ${statusColor}`}
                     >
                       {status}
                     </Badge>
